@@ -4,7 +4,7 @@ export const style = StyleSheet.create({
   inputContainer: {
     paddingLeft: 30,
     paddingRight: 30,
-   marginTop:"50%"
+   marginTop:"20%"
   },
   input: {
     backgroundColor: 'white',
@@ -14,7 +14,8 @@ export const style = StyleSheet.create({
     backgroundColor:"white",
     borderRadius:30,
     marginTop:30,
-    padding:15
+    padding:15,
+    width:"100%"
   },
   addBtn:{
     backgroundColor:'maroon',

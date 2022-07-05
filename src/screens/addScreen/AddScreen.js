@@ -1,34 +1,90 @@
-import {View, Text, TextInput, TouchableOpacity} from 'react-native';
+import {View, Text, TextInput, TouchableOpacity, StatusBar} from 'react-native';
 import React from 'react';
 import {style} from './AddScreenStyle';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import UseAddScreen from './UseAddScreen';
-
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 export default function AddScreen() {
-  const [{name, setName, navigation}]= UseAddScreen();
+  const [
+    {
+      name,
+      setName,
+      date,
+      setDate,
+      navigation,
+      isDatetimePickerVisible,
+      showDateModal,
+      hideDateModal,
+      handleConfirm,
+      getDate,
+      ctaAddHandler,
+      showTimeModal,
+      hideTimeModal,
+      handleTimeConfirm,
+      time,
+      setTime,
+      isTimePickerVisible,
+      setIsTimePickerVisible,
+      getTime
+    },
+  ] = UseAddScreen();
   console.log(name);
+
   return (
     <View style={{flex: 1, backgroundColor: 'skyblue'}}>
       <View style={style.inputContainer}>
-        <TextInput placeholder="Name" 
-        value={name}
-        onChangeText={setName}
-        style={style.input}
         
+        <TextInput
+          placeholder="Name"
+          value={name}
+          onChangeText={setName}
+          style={style.input}
         />
-        <TextInput placeholder="set Date" style={style.dateInput} />
+        <View style={{flexDirection: 'row', width: '100%'}}>
+          <TextInput
+            placeholder="set Date"
+            value={getDate()}
+            onPressIn={showDateModal}
+            style={style.dateInput}
+          />
+          <View>
+            <TouchableOpacity onPress={showDateModal}>
+              <Text> Cal </Text>
+            </TouchableOpacity>
+            <DateTimePickerModal
+              isVisible={isDatetimePickerVisible}
+              mode="date"
+              onConfirm={handleConfirm}
+              onCancel={hideDateModal}
+            />
+          </View>
+        </View>
       </View>
-      <View style={{padding:50}}>
-        <TouchableOpacity>
-
-            <Text style={style.addBtn}>
-                Add Birthday
-            </Text>
+      <View style={{flexDirection: 'row', width: '100%',paddingLeft:30, paddingRight:30}}>
+          <TextInput
+            placeholder="set Date"
+            value={getTime()}
+            onPressIn={showTimeModal}
+            style={style.dateInput}
+          />
+          <View>
+            <TouchableOpacity onPress={showTimeModal}>
+             <Icon name="calendar-o" size={30} color="white"  />
+            </TouchableOpacity>
+            <DateTimePickerModal
+              isVisible={isTimePickerVisible}
+              mode="time"
+              onConfirm={handleTimeConfirm}
+              onCancel={hideTimeModal}
+            />
+          </View>
+        </View>
+      <View style={{padding: 50}}>
+        <TouchableOpacity onPress={ctaAddHandler}>
+          <Text style={style.addBtn}>Add Birthday</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>navigation.navigate("Home")}>
-
-            <Text style={style.cancelBtn}>
-               Cancel
-            </Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <Text style={style.cancelBtn}>Cancel</Text>
         </TouchableOpacity>
       </View>
     </View>

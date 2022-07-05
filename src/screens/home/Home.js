@@ -1,33 +1,47 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Alert,
+  ImageBackground,
+} from 'react-native';
 import React from 'react';
 import {style} from './HomeStyle';
+import {useState, useEffect} from 'react';
 import UseHome from './UseHome';
+import {useSelector, useDispatch} from 'react-redux';
+import {getBirthday} from '../../store/birthdaySlice';
+import Card from '../../components/card/Card';
+import Building from '../../assets/background.png';
 export default function Home() {
-const [{navigation}]= UseHome();
+  const [{navigation, goAddHandler, birthdayData}] = UseHome();
+  console.log('Data from useSelector in home', birthdayData);
   return (
-    <View style={style.mainContainer}>
-      <View style={style.redBtnContainer}>
-        <Text style={style.redBtn}>...</Text>
-      </View>
-      <View style={style.nameContainer}>
-        <Text style={style.personName}>Sheikh's</Text>
-        <Text style={style.personName}>Birthday</Text>
-        <Text style={style.birthdayDate}>28-June-2022</Text>
-      </View>
+    <ImageBackground source={Building} style={{flex: 1}}>
+      <View style={style.mainContainer}>
+        <View style={style.redBtnContainer}>
+          <Text style={style.redBtn}>...</Text>
+        </View>
+        {/* Map Data */}
 
-      <View style={style.imgContainer}></View>
-      <View style={style.countDownContainer}></View>
-      <View style={style.btnContainer}>
-        <TouchableOpacity onPress={()=>navigation.navigate("Add Birthday")}>
-          <Text style={{color:"white",fontSize:20}}>Add</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={{color:"white",fontSize:20}}>Edit</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={{color:"white",fontSize:20,}}>Delete</Text>
-        </TouchableOpacity>
+        <View style={{height: 200, width: '100%'}}>
+          {birthdayData?.map(singleBirthday => {
+            return (
+              <View style={style.nameContainer} key={singleBirthday.docId}>
+                <Card singleBirthday={singleBirthday} />
+              </View>
+            );
+          })}
+        </View>
+
+        <View style={style.imgContainer}></View>
+        <View style={style.countDownContainer}></View>
+        <View style={style.btnContainer}>
+          <TouchableOpacity onPress={goAddHandler}>
+            <Text style={{color: 'white', fontSize: 20}}>Add</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </ImageBackground>
   );
 }
