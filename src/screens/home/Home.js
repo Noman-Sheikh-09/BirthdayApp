@@ -2,20 +2,26 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Alert,
   ImageBackground,
+  Image,
 } from 'react-native';
 import React from 'react';
 import {style} from './HomeStyle';
-import {useState, useEffect} from 'react';
 import UseHome from './UseHome';
-import {useSelector, useDispatch} from 'react-redux';
-import {getBirthday} from '../../store/birthdaySlice';
 import Card from '../../components/card/Card';
-import Building from '../../assets/background.png';
+import Building from '../../assets/bg.jpg';
 export default function Home() {
   const [{navigation, goAddHandler, birthdayData}] = UseHome();
-  console.log('Data from useSelector in home', birthdayData);
+  // console.log('Data from useSelector in home', birthdayData);
+  const Images = [  
+    require("../../assets/heart.png"),
+    require("../../assets/insta.png"),
+    require("../../assets/star.png"),
+    require("../../assets/vector.png"),
+    require("../../assets/chips.png"),
+    require("../../assets/ludo.png"),
+    require("../../assets/oip.png")
+  ]
   return (
     <ImageBackground source={Building} style={{flex: 1}}>
       <View style={style.mainContainer}>
@@ -33,11 +39,17 @@ export default function Home() {
             );
           })}
         </View>
-
-        <View style={style.imgContainer}></View>
-        <View style={style.countDownContainer}></View>
+        {/* images part  */}
+        <View style={style.imgContainer}>
+        <Image
+            style={style.images}
+            source={Images[new Date().getDay()]}
+            resizeMode="contain"
+          />
+        </View>
+      
         <View style={style.btnContainer}>
-          <TouchableOpacity onPress={goAddHandler}>
+          <TouchableOpacity onPress={birthdayData?.length>=1?null:goAddHandler}>
             <Text style={{color: 'white', fontSize: 20}}>Add</Text>
           </TouchableOpacity>
         </View>

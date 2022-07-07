@@ -1,8 +1,8 @@
-import {View, Text, TextInput, TouchableOpacity, StatusBar} from 'react-native';
+import {View, Text, TextInput, TouchableOpacity,  ImageBackground} from 'react-native';
 import React from 'react';
 import {style} from './AddScreenStyle';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import UseAddScreen from './UseAddScreen';
+import Background from '../../assets/bg.jpg'
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 export default function AddScreen() {
   const [
@@ -28,10 +28,11 @@ export default function AddScreen() {
       getTime
     },
   ] = UseAddScreen();
-  console.log(name);
+  // console.log(name);
 
   return (
     <View style={{flex: 1, backgroundColor: 'skyblue'}}>
+      <ImageBackground source={Background} style={{flex:1}} >
       <View style={style.inputContainer}>
         
         <TextInput
@@ -42,15 +43,13 @@ export default function AddScreen() {
         />
         <View style={{flexDirection: 'row', width: '100%'}}>
           <TextInput
-            placeholder="set Date"
+            placeholder="Set Date"
             value={getDate()}
             onPressIn={showDateModal}
             style={style.dateInput}
           />
           <View>
-            <TouchableOpacity onPress={showDateModal}>
-              <Text> Cal </Text>
-            </TouchableOpacity>
+           
             <DateTimePickerModal
               isVisible={isDatetimePickerVisible}
               mode="date"
@@ -62,14 +61,13 @@ export default function AddScreen() {
       </View>
       <View style={{flexDirection: 'row', width: '100%',paddingLeft:30, paddingRight:30}}>
           <TextInput
-            placeholder="set Date"
+            placeholder="set Time"
             value={getTime()}
             onPressIn={showTimeModal}
             style={style.dateInput}
           />
           <View>
             <TouchableOpacity onPress={showTimeModal}>
-             <Icon name="calendar-o" size={30} color="white"  />
             </TouchableOpacity>
             <DateTimePickerModal
               isVisible={isTimePickerVisible}
@@ -87,6 +85,7 @@ export default function AddScreen() {
           <Text style={style.cancelBtn}>Cancel</Text>
         </TouchableOpacity>
       </View>
+      </ImageBackground>
     </View>
   );
 }

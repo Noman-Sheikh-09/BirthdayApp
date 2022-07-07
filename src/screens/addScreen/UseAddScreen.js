@@ -9,7 +9,6 @@ export default function UseAddScreen() {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
 
-
   const [isDatetimePickerVisible, setIsDatetimePickerVisible] = useState(false);
   const [isTimePickerVisible, setIsTimePickerVisible] = useState(false);
   const dispatch = useDispatch();
@@ -32,19 +31,26 @@ export default function UseAddScreen() {
       const year = date.getFullYear();
       const month = date.getMonth() + 1;
       const currentDate = date.getDate();
-      // const hours=time.getHours();
-      // const minutes=time.getMinutes();,hours,minutes
-      const dateData = new Date(year, month, currentDate).toISOString();
+      const hours = time.getHours();
+      const minutes = time.getMinutes();
+      const dateData = new Date(
+        year,
+        month,
+        currentDate,
+        hours,
+        minutes,
+      ).toISOString();
+
       const data = {
         name: name,
         start: dateData,
         date: getDate(),
-        // time:getTime(),
+        time: getTime(),
       };
       console.log(data);
       // dispatch will be here
       dispatch(addBirthday(data));
-      navigation.replace("Home")
+      navigation.replace('Home');
     } else {
       Alert.alert('Please fill all fields ');
     }
@@ -58,24 +64,25 @@ export default function UseAddScreen() {
     setIsTimePickerVisible(false);
   };
 
-  const handleTimeConfirm = time => {
-    hideTimePicker();
+  const handleTimeConfirm = (time) => {
+    // hideTimePicker();
     setTime(time);
+    console.log(new Date(time).toTimeString())
   };
 
   const getDate = () => {
     let tempDate = date.toString().split(' ');
-    if (tempDate[2] == new Date().getDate()) {
-      return 'Today';
-    } else if (tempDate[2] == new Date().getDate() - 1) {
-      return 'Yesterday';
-    } else if (tempDate[2] == new Date().getDate() + 1) {
-      return 'Tomorrow';
-    } else {
+    // if (tempDate[2] == new Date().getDate()) {
+    //   return 'Today';
+    // } else if (tempDate[2] == new Date().getDate() - 1) {
+    //   return 'Yesterday';
+    // } else if (tempDate[2] == new Date().getDate() + 1) {
+    //   return 'Tomorrow';
+    // } else {
       return date !== ''
         ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
         : '';
-    }
+    // }
   };
   const getTime = () => {
     let tempTime = time.toString().split(' ');

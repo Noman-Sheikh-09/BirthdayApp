@@ -8,14 +8,18 @@ export const style = StyleSheet.create({
       },
       input: {
         backgroundColor: 'white',
-        borderRadius: 30,padding:15
+        borderRadius: 30,padding:15,
+        borderWidth:3,
+        borderColor:'#1CC625',
       },
       dateInput:{
         backgroundColor:"white",
         borderRadius:30,
         marginTop:30,
         padding:15,
-        width:"100%"
+        width:"100%",
+        borderWidth:3,
+        borderColor:'#1CC625'
       },
       addBtn:{
         backgroundColor:'maroon',

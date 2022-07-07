@@ -5,21 +5,17 @@ import {useSelector, useDispatch} from 'react-redux';
 import {deleteBirthday, getBirthday} from '../../store/birthdaySlice';
 export default function UseHome() {
   const birthdayData = useSelector(state => state.birth.birthdayArray);
-  // console.log("data from useSelector",birthdayData);
+  const updateObj = useSelector(state => state.birth.updateObj);
+
   const dispatch = useDispatch();
   const navigation = useNavigation();
-
   useEffect(() => {
     dispatch(getBirthday());
-  }, []);
+  }, [birthdayData]);
 
   const goAddHandler = () => {
     navigation.navigate('Add Birthday');
   };
-  // const ctaDeleteHandler =(docId)=>{
-  //   dispatch(deleteBirthday(docId))
-  //   console.log();
-  // }
 
   return [
     {

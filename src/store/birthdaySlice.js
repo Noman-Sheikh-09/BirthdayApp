@@ -12,7 +12,7 @@ export const getBirthday = createAsyncThunk(
       const snapShot = await db.collection('birthdays').get();
       snapShot.forEach((item) => {
         birthday.push({...item.data(), docId:item.id});
-      console.log('birthday array', birthday);
+      // console.log('birthday array', birthday);
       });
       return birthday;
     } catch (error) {
@@ -27,7 +27,7 @@ export const addBirthday = createAsyncThunk(
     try {
       await db.collection('birthdays').add(data);
       const localData = {...data, docId:data.id};
-      console.log('data in slice', localData);
+      // console.log('data in slice', localData);
       return localData;
 
     } catch (error) {
@@ -77,7 +77,7 @@ const birthdaySlice = createSlice({
   extraReducers: {
     [getBirthday.fulfilled]: (state, action) => {
       state.birthdayArray = action.payload;
-      console.log('data in get reducer', action.payload);
+      // console.log('data in get reducer', action.payload);
       state.pending = false;
     },
     [getBirthday.rejected]: (state, action) => {
@@ -112,7 +112,7 @@ const birthdaySlice = createSlice({
         return singleItem;
       }
     });
-console.log("updated data",updatedData);
+// console.log("updated data",updatedData);
     state.todo = updatedData;
   },
 });

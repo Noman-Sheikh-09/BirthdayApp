@@ -2,10 +2,10 @@ import {StyleSheet} from 'react-native';
 export const style = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: 'skyblue',
+    // backgroundColor: 'skyblue',
   },
   redBtnContainer: {
-    flex: 0.10,
+    flex: 0.1,
     padding: 50,
     marginTop: 20,
   },
@@ -23,25 +23,29 @@ export const style = StyleSheet.create({
   personName: {
     color: 'white',
     fontSize: 30,
-    fontWeight:'bold',
+    fontWeight: 'bold',
+  },
+  birthdayDate: {
+    color: 'white',
+    fontSize: 18,
+    marginTop: 10,
+  },
 
-  },
-  birthdayDate:{
-color:'white',
-fontSize:18,
-marginTop:10
-  },
-  imgContainer: {
-    flex: 3,
-  },
-  countDownContainer: {
-    flex: 1,
-  },
   btnContainer: {
     flex: 1,
     flexDirection: 'row',
-   
+
     justifyContent: 'space-around',
-    alignItems:'center'
+    alignItems: 'center',
+  },
+  imgContainer: {
+    flex: 4,
+  },
+  images: {
+    position: 'absolute',
+    bottom: 100,
+    left: 180,
+    width: 200,
+    borderRadius: 500,
   },
 });

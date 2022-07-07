@@ -14,7 +14,7 @@ export const style = StyleSheet.create({
   counterContainer: {
     flex: 15,
     alignItems: 'flex-start',
-    marginTop: 200,
+    marginTop: 300,
   },
   buttonContainer: {
   
