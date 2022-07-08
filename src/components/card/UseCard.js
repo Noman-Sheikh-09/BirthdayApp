@@ -4,8 +4,9 @@ import {useState, useEffect} from 'react';
 import {deleteBirthday} from '../../store/birthdaySlice';
 import {useNavigation} from '@react-navigation/native';
 
+
 export default function UseCard() {
-  const birthdayData = useSelector((state)=>state.birth.birthdayArray)
+  const birthdayData = useSelector(state => state.birth.birthdayArray);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const ctaDeleteHandler = docId => {
@@ -14,26 +15,21 @@ export default function UseCard() {
   };
   // console.log('data in useCard',birthdayData);
 
-  
   const ctaUpdateHandler = docId => {
     navigation.navigate('Edit Birthday', {id: docId});
   };
-const ctaFinishHandler=(docId)=>{
-  navigation.navigate("Wish Birthday")
-setTimeout(()=>{
-dispatch(deleteBirthday(docId));
-navigation.navigate("Home")
-},15000)
 
-}
-
-
+  // On finish Handler Logic
   
-  return [
-    {navigation,
-      ctaDeleteHandler,
-      ctaUpdateHandler,
-      ctaFinishHandler
-    },
-  ];
+
+  const ctaFinishHandler = docId => {
+    navigation.navigate('Wish Birthday');
+
+    setTimeout(() => {
+      dispatch(deleteBirthday(docId));
+      navigation.navigate('Home');
+    }, 15000);
+  };
+
+  return [{navigation, ctaDeleteHandler, ctaUpdateHandler, ctaFinishHandler}];
 }
